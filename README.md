@@ -36,3 +36,7 @@ python cluster_enrichment.py --emb ./data/emb/yeast_branemf_w1_alpha_1.emb --k 4
 ```
 
 **7.** Perform protein function prediction
+
+**8.** Perform protein Interaction prediction
+
+**9.** Perform Network reconstruction
