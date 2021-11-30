@@ -45,7 +45,7 @@ python ppi_pre_preprocess_files.py --new ./data/yeast_string_refnet_2021.txt --o
 ```
 **b.** compute the scores
 ```
-python predict_ppi.py --emb ./data/emb/yeast_branemf_w3_alpha_1.emb --sample_file ppi_pred_samples.pkl 
+python predict_ppi.py --emb ./data/emb/yeast_branemf_w3_alpha_1.emb --sample_file ./data/ppi_pred_samples.pkl 
 ```
 
 **9.** Perform Network reconstruction
