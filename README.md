@@ -1,4 +1,5 @@
 # BraneMF: Integration of Biological Networks for Functional Analysis of Proteins
+![workflow-1](https://user-images.githubusercontent.com/47250394/144040612-bda99618-1a26-4f69-b44c-bb0b167d1f8f.png)
 
 #### Create a virtual environment with conda
 
