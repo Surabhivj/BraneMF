@@ -39,4 +39,13 @@ python cluster_enrichment.py --emb ./data/emb/yeast_branemf_w1_alpha_1.emb --k 4
 
 **8.** Perform protein Interaction prediction
 
+**a.** Prepare the training and test sets.
+```
+python ppi_pre_preprocess_files.py --new ./data/yeast_string_refnet_2021.txt --old ./data/old_ppis.txt --genes ./data/yeast_string_genes.txt
+```
+**b.** compute the scores
+```
+python predict_ppi.py --emb ./data/emb/yeast_branemf_w3_alpha_1.emb --sample_file ppi_pred_samples.pkl 
+```
+
 **9.** Perform Network reconstruction
