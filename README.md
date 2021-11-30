@@ -1,4 +1,4 @@
-## Project name: BraneMF
+##BraneMF
 
 #### Create a virtual environment with conda
 
