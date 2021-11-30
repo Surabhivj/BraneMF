@@ -1,4 +1,5 @@
-##BraneMF
+##BraneMF: Integration of Biological Networks for
+Functional Analysis of Proteins
 
 #### Create a virtual environment with conda
 
