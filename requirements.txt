@@ -1,0 +1,11 @@
+numpy
+
+scipy
+
+networkx
+
+scikit-learn
+
+matplotlib
+pandas
+gseapy
