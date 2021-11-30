@@ -25,6 +25,10 @@ Google drive:
 ```
 **5.** Computation of embeddings
 
+```
+run file: branemf.m 
+```
+
 **6.** Perform clustering and GO enrichment
 
 ```
