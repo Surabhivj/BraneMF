@@ -28,7 +28,7 @@ Google drive:
 **6.** Perform clustering and GO enrichment
 
 ```
-pyhton cluster_enrichment.py --emb ./data/emb/yeast_branemf_w1_alpha_1.emb --k 40 --sim 20 --genes ./data/yeast_string_genes.txt
+python cluster_enrichment.py --emb ./data/emb/yeast_branemf_w1_alpha_1.emb --k 40 --sim 20 --genes ./data/yeast_string_genes.txt
 ```
 
 **7.** Perform protein function prediction
