@@ -16,3 +16,6 @@ conda activate branemf
 ```
 pip install -r requirements.txt
 ```
+
+**4.** Download the yeast data and precomputed embeddings
+
