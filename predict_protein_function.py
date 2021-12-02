@@ -23,7 +23,7 @@ def parse_args():
                         help='annotation file')
     parser.add_argument('--trials', type=int, nargs='?',
                         help='number of CV trials')
-    parser.add_argument('--level', type=int, nargs='?',default = 'level 1',
+    parser.add_argument('--level', type=str, nargs='?',default = '1',
                         help='levels in annotation file')
     return parser.parse_args()
 
@@ -39,7 +39,7 @@ def write_res(perf, fout):
 anno_file = args.anno
 emb_file = args.emb
 n_trials = args.trials
-level = args.level
+level = "level " + args.level
 
 anno = sio.loadmat(anno_file)
 anno_level = anno[level]
