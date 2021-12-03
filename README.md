@@ -28,7 +28,7 @@ Google drive:
 ```
 run file: branemf.m 
 ```
-
+**To reproduce the results, use precomuted embeddings**
 **6.** Perform clustering and GO enrichment
 
 ```
