@@ -54,5 +54,5 @@ python predict_protein_function.py --emb ./data/emb/yeast_branemf_w3_alpha_1.emb
 **9.** Perform Network reconstruction
 
 ```
-python predict_protein_function.py --emb ./data/emb/yeast_branemf_w1_alpha_1.emb --refnet ./data/yeast_string_refnet_2021.txt --sim 20 --genes ./data/yeast_string_genes.txt
+python net_reconst.py --emb ./data/emb/yeast_branemf_w1_alpha_1.emb --refnet ./data/yeast_string_refnet_2021.txt --sim 20 --genes ./data/yeast_string_genes.txt
 ```
