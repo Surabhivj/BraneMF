@@ -6,29 +6,17 @@ Created on Wed Nov 24 10:41:56 2021
 """
 
 import pandas as pd
-from sklearn.metrics.pairwise import euclidean_distances
 import numpy as np
-from matplotlib import pyplot
-import seaborn as sns
-from sklearn.metrics import roc_curve,average_precision_score,auc
-import scipy.io as sio
-from sklearn.metrics import confusion_matrix
-import ast
 import networkx as nx
 import statistics
-from sklearn.metrics.pairwise import euclidean_distances,paired_distances
-from sklearn.metrics import precision_recall_curve,recall_score,confusion_matrix,matthews_corrcoef
-from sklearn.metrics import pairwise_distances
-from sklearn import preprocessing
-from scipy.spatial import distance_matrix
 import pickle
 import argparse
-import scipy.stats as stats
-import glob
 import random
+import ast
+
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="performs clustering and cluster enrichment/evaluation")
+    parser = argparse.ArgumentParser(description="sample the test and train data with negative datasets")
 
     parser.add_argument('--new', nargs='?',
                         help='updated PPIs of 2021')
@@ -90,11 +78,19 @@ def main(args):
     test_samples = pos_test_edges + neg_test_edges
     test_labels = [1 for _ in pos_test_edges] + [0 for _ in neg_test_edges]
 
-    save_file_path = "ppi_pred_samples.pkl"
+    #save_file_path = "train.pkl"
+    
+    train = {'edges':train_samples, 'labels': train_labels}
+    test = {'edges':test_samples, 'labels': test_labels}
 
+    pickle.dump(train, open("./data/train.pkl", "wb"))
+    pickle.dump(test, open("./data/test.pkl", "wb"))
+    '''
     with open(save_file_path, 'wb') as f:
-        pickle.dump({'train': {'edges':train_samples, 'labels': train_labels },
-        'test': {'edges':test_samples, 'labels': test_labels}}, f, pickle.HIGHEST_PROTOCOL)
+        pickle.dump({'train': {'edges':train_samples, 'labels': train_labels }},f)
+        pickle.dump({'test': {'edges':test_samples, 'labels': test_labels}}, f)
+        f.close()
+    '''
 
 if __name__ == '__main__':
     args = parse_args()

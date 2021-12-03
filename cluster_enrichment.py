@@ -17,14 +17,14 @@ import statistics as st
 def parse_args():
     parser = argparse.ArgumentParser(description="performs clustering and cluster enrichment/evaluation")
 
-    parser.add_argument('--emb', nargs='?',
+    parser.add_argument('--emb',type=str, nargs='?',
                         help='Embedding directory')
-    parser.add_argument('--k', nargs='?',
+    parser.add_argument('--k', type=int, nargs='?',
                         help='number of clusters')
-    parser.add_argument('--sim', nargs='?',default=20,
+    parser.add_argument('--sim',type=int, nargs='?',default=20,
                         help='number of simulations')
-    parser.add_argument('--genes',nargs='?', default='data\\yeast_string_genes.txt',
-                        help='functional annotation file')
+    parser.add_argument('--genes',nargs='?', type=str, default='data\\yeast_string_genes.txt',
+                        help='gene list')
   
     return parser.parse_args()
 
@@ -94,7 +94,7 @@ def main(args):
             df.to_csv(f,index = False,line_terminator='\n')
         f.close()
     dat_res = pd.DataFrame({'method':file,'Total_enriched_clusters':enriched_file_per,
-    'simmulation':list(range(20)),'mean_adj_pval':p_val_all_file,'mean_es':es_all_file,
+    'simmulation':list(range(sim)),'mean_adj_pval':p_val_all_file,'mean_es':es_all_file,
     'Z_score':zscore_all_file})
     fname = str(file)+"clustering_res_"+str(k)+".result"
     dat_res.to_csv(fname,index=False)

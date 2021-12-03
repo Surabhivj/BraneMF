@@ -1,11 +1,10 @@
 numpy
-
 scipy
-
 networkx
-
 scikit-learn
-
 matplotlib
 pandas
 gseapy
+tabulate
+pickl5
+theano

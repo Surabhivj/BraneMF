@@ -9,7 +9,10 @@ import scipy.io as sio
 import logging
 import pandas as pd
 import argparse
-from code.cv import cross_validation
+from cv import cross_validation
+#import pickle5 as pickle
+
+import theano
 
 logger = logging.getLogger(__name__)
 theano.config.exception_verbosity='high'
@@ -36,16 +39,22 @@ def write_res(perf, fout):
     #fout.write('\n')
   fout.close()
   
-anno_file = args.anno
-emb_file = args.emb
-n_trials = args.trials
-level = "level " + args.level
 
-anno = sio.loadmat(anno_file)
-anno_level = anno[level]
-emb = pd.read_csv(emb_file,delimiter = "\s",index_col= 0, header = None, skiprows= 1)
-out_file = emb_file + "." + level
-pref_level= cross_validation(emb.values,anno_level,n_trials = n_trials)
-write_res(pref_level,out_file)
+def main(args):
+    anno_file = args.anno
+    emb_file = args.emb
+    n_trials = args.trials
+    level = "level" + args.level
+
+    anno = sio.loadmat(anno_file)
+    anno_level = anno[level]
+    emb = pd.read_csv(emb_file,delimiter = "\s",index_col= 0, header = None, skiprows= 1)
+    out_file = emb_file + "." + level
+    pref_level= cross_validation(emb.values,anno_level,n_trials = n_trials)
+    write_res(pref_level,out_file)
+
+if __name__ == '__main__':
+    args = parse_args()
+    main(args)
 
 
