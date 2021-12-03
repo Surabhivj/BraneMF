@@ -48,7 +48,7 @@ python predict_protein_function.py --emb ./data/emb/yeast_branemf_w3_alpha_1.emb
   ```
   **b.** compute the scores
   ```
-  python predict_ppi.py --emb ./data/emb/yeast_branemf_w3_alpha_1.emb --sample_file ./data/ppi_pred_samples.pkl 
+  python predict_ppi.py --emb ./data/emb/yeast_branemf_w3_alpha_1.emb --train ./data/train.pkl --test ./data/test.pkl
   ```
 
 **9.** Perform Network reconstruction
