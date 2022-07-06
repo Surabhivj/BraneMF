@@ -8,3 +8,4 @@ gseapy
 tabulate
 pickl5
 theano
+openssl
