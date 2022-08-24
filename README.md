@@ -21,7 +21,7 @@ pip install -r requirements.txt
 **4.** Download the yeast data and precomputed embeddings
 
 ```
-Google drive: 
+Google drive: https://drive.google.com/drive/folders/1X5Gj5udIPKiLEvzeKWuUucnWw5AZOsnY?usp=sharing 
 ```
 **5.** Computation of embeddings
 
