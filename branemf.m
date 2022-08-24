@@ -4,37 +4,25 @@ addpath code
 
 %% load networks
 
-load('data/neighborhood.mat')
-load('data/fusion.mat')
-load('data/cooccurence.mat')
-load('data/coexpression.mat')
-load('data/experimental.mat')
-load('data/database.mat')
 
-A = full(net1);
-A(:,:,2) = full(net2);
-A(:,:,3) = full(net3);
-A(:,:,4) = full(net4);
-A(:,:,5) = full(net5);
-A(:,:,6) = full(net6);
+A(:,:,1) = load('Org4932BraneMF_w8_16June2022.mat').experimental;
+A(:,:,2) = load('Org4932BraneMF_w8_16June2022.mat').neighborhood;
+A(:,:,3) = load('Org4932BraneMF_w8_16June2022.mat').fusion;
+A(:,:,4) = load('Org4932BraneMF_w8_16June2022.mat').cooccurence;
+A(:,:,5) = load('Org4932BraneMF_w8_16June2022.mat').coexpression;
+A(:,:,6) = load('Org4932BraneMF_w8_16June2022.mat').database;
+
+
 
 %% setting parameters
 dim = 500; %size of embedding
 alpha2 = 1; %weignting factor
+
+
 N = size(A,1); % number of vertices
 M = size(A,3); % number of layers
 
-%% compute random walk matrix (make sure your system is compatible to execute python codes)
-
-for i = 1:M
-    L(:,:,i) = pyrunfile("rw_mat.py", "m", A = A(:,:,i), w = 3);  %A = adjacency matrix, w = window size
-end
-
-N = size(L,1); % number of vertices
-M = size(L,3); % number of layers
-%% initialization
-
-B = (L(:,:,1)+L(:,:,2)+L(:,:,3)+L(:,:,4)+L(:,:,5)+L(:,:,6)/6);
+B = (A(:,:,1)+A(:,:,2)+A(:,:,3)+A(:,:,4)+A(:,:,5)+A(:,:,6)/6);
 
 niter = 100;
 options = optimset('Display','iter');
@@ -56,19 +44,19 @@ for i = 1:niter
     fun = @comeig_lbfgs_A;
     
     % solve P while fixing Q and D
-    [p,fval,exitflag,output] = lbfgs(@comeig_lbfgs_A,p,N,M,L,D,Q,alpha,beta, options);
+    [p,fval,exitflag,output] = lbfgs(@comeig_lbfgs_A,p,N,M,A,D,Q,alpha,beta, options);
     
     P = reshape(p',N,N);
     fun = @comeig2_lbfgs_A;
     % solve Q while fixing P and D
-    [q,fval,exitflag,output] = lbfgs(@comeig2_lbfgs_A,q,N,M,L,D,P,alpha,beta,options);
+    [q,fval,exitflag,output] = lbfgs(@comeig2_lbfgs_A,q,N,M,A,D,P,alpha,beta,options);
     Q = reshape(q',N,N);
     
     fun = @comeig_lbfgs_A;
     
     % evaluate the objective function
     
-    cost(i) = comeig_lbfgs_A(p,N,M,L,D,Q,alpha,beta);
+    cost(i) = comeig_lbfgs_A(p,N,M,A,D,Q,alpha,beta);
     
     plot(i,cost(i),'.r')
     hold on, drawnow
@@ -80,8 +68,17 @@ for i = 1:niter
     
 end
 
-v = P(:,1:dim);
-d = D(1:dim,1:dim);
-emb = v*(d^(alpha2));
-filename = strcat('yeast_branemf_w_a_',num2str(alpha),'_b_',num2str(beta),'_d_',num2str(dim),'_alpha_',num2str(alpha2),'.txt');
-writematrix(emb,filename,'Delimiter','tab')
+for dim = [128,256,512,1024]
+    for alpha2 = [0,0.25,0.50,0.75,1]
+
+        v = P(:,1:dim);
+        d = D(1:dim,1:dim);
+        emb = v*(d^(alpha2));
+        filename = strcat('Org4932_BraneMF_w8_d',num2str(dim),'_alpha_',num2str(alpha2),'.txt');
+        writematrix(emb,filename,'Delimiter','tab')
+
+    end
+end
+
+
+
