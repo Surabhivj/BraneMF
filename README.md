@@ -18,7 +18,7 @@ conda activate branemf
 pip install -r requirements.txt
 ```
 
-**4.** Download the yeast data and precomputed embeddings
+**4.** Download the precomputed PPMI matrix files
 
 ```
 Google drive: https://drive.google.com/drive/folders/1X5Gj5udIPKiLEvzeKWuUucnWw5AZOsnY?usp=sharing 
