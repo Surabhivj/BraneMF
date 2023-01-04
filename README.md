@@ -1,4 +1,9 @@
 # BraneMF: Integration of Biological Networks for Functional Analysis of Proteins
+
+# Citation
+**Surabhi Jagtap, Abdulkadir Çelikkanat, Aurélie Pirayre, Frédérique Bidard, Laurent Duval, Fragkiskos D Malliaros, BraneMF: integration of biological networks for functional analysis of proteins, Bioinformatics, Volume 38, Issue 24, 15 December 2022, Pages 5383–5389, https://doi.org/10.1093/bioinformatics/btac691**
+
+
 ![BraneMF](https://user-images.githubusercontent.com/47250394/144092544-0ca33e5a-0d08-4a7a-833b-5edca24a7a61.png)
 
 #### Create a virtual environment with conda
@@ -57,4 +62,3 @@ python predict_protein_function.py --emb ./data/emb/yeast_branemf_w3_alpha_1.emb
 python net_reconst.py --emb ./data/emb/yeast_branemf_w1_alpha_1.emb --refnet ./data/yeast_string_refnet_2021.txt --genes ./data/yeast_string_genes.txt
 ```
 
-**Surabhi Jagtap, Abdulkadir Çelikkanat, Aurélie Pirayre, Frédérique Bidard, Laurent Duval, Fragkiskos D Malliaros, BraneMF: integration of biological networks for functional analysis of proteins, Bioinformatics, Volume 38, Issue 24, 15 December 2022, Pages 5383–5389, https://doi.org/10.1093/bioinformatics/btac691**
