@@ -43,7 +43,7 @@ python cluster_enrichment.py --emb ./data/emb/yeast_branemf_w1_alpha_1.emb --k 4
 
 **7.** Perform protein function prediction
 ```
-python protein_function_prediction.py --emb ./data/emb/yeast_branemf_w3_alpha_1.emb --anno ./data/yeast_annotations.mat --trials 10 --level 1
+python Protein_function_prediction.py --emb ./data/emb/yeast_branemf_w3_alpha_1.emb --anno ./data/yeast_annotations.mat --trials 10 --level 1
 ```
 **8.** Perform protein Interaction prediction
 
