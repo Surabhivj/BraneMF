@@ -31,6 +31,11 @@ def main(args):
     import functions as fun
 
     start = time.time()
+    
+    isExist = os.path.exists("Network_files")
+
+    if not isExist:
+          os.makedirs("Network_files")
 
 
     #To keep the information of date for the downloaded files
@@ -51,13 +56,13 @@ def main(args):
     #download protein annotation file
 
     protein_anno_url = "https://stringdb-static.org/download/protein.enrichment.terms.v11.5/" + org + ".protein.enrichment.terms.v11.5.txt.gz"
-    protein_anno_url_file = "org_" + org + "_prot_annot_" + dat + ".txt.gz"
+    protein_anno_url_file = os.path.join("Network_files", "org_" + org + "_prot_annot_" + dat + ".txt.gz")
     response = wget.download(protein_anno_url, protein_anno_url_file)
     prot_anno_dat = pd.read_csv(protein_anno_url_file, sep = "\t",low_memory=False)
 
     # To download  metadata
     String_info_url = "https://stringdb-static.org/download/protein.info.v11.5/" + org + ".protein.info.v11.5.txt.gz"
-    String_info_url_file = "Protein" + org + "_info_" + dat + ".txt.gz"
+    String_info_url_file = os.path.join("Network_files", "Protein" + org + "_info_" + dat + ".txt.gz")
     response = wget.download(String_info_url, String_info_url_file)
     string_info_dat = pd.read_csv(String_info_url_file, sep= '\t')
     
@@ -65,7 +70,7 @@ def main(args):
     #link of files from databases
     # To download networks
     String_network_url = "https://stringdb-static.org/download/protein.links.detailed.v11.5/" + org + ".protein.links.detailed.v11.5.txt.gz"
-    String_url_file = "String_PPI_" + org + "_" + dat + ".txt.gz"
+    String_url_file = os.path.join("Network_files","String_PPI_" + org + "_" + dat + ".txt.gz")
     response = wget.download(String_network_url, String_url_file)
     string_ppi_dat = pd.read_csv(String_url_file, sep= ' ')
     string_ppi_dat = string_ppi_dat[string_ppi_dat['combined_score'] > 899]
@@ -86,10 +91,10 @@ def main(args):
     net_type = ['experimental', 'neighborhood', 'fusion','cooccurence', 'coexpression', 'database']
     
     
-    isExist = os.path.exists("BraneMF_emb")
+    isExist = os.path.exists("PPMI_Matrices")
 
     if not isExist:
-          os.makedirs("BraneMF_emb")
+          os.makedirs("PPMI_Matrices")
 
     #computing RW matrices
     window_size = [1,2,4,6,8,10]
@@ -112,22 +117,22 @@ def main(args):
             G = nx.from_pandas_edgelist(ppi_net, 'protein1', 'protein2',edge_attr=True)
             G = nx.relabel_nodes(G, node_dict)
             A = nx.adjacency_matrix(G, nodelist= all_nodes, weight='weight').copy()
-            ppi_file = net_type[typ] +  "_" + org  + '_' + dat + ".txt"
+            ppi_file = os.path.join("Network_files", net_type[typ] +  "_" + org  + '_' + dat + ".txt")
             nx.write_edgelist(G,ppi_file, data=True)
 
             print("------------Computing RW matrix for " + net_type[typ] + "------------------!!!")
             #print("window_size :" + str(w))
 
-            file_name = net_type[typ] +  "_" + org  + '_' + dat + ".txt"
-            Adj = A.copy()
-            M = fun.PPMI_matrix(Adj,w,1)
+            file_name = os.path.join("Network_files", net_type[typ] +  "_" + org  + '_' + dat + ".txt")
+     
+            M = fun.PPMI_matrix(G,w,1,all_nodes)
             #M_vec = np.reshape(M, -1)
             M_vec_list.append(M.todense())
             M_list.append(M)
             
         net_type_dic = {'experimental' : M_vec_list[0], 'neighborhood': M_vec_list[1], 'fusion' :M_vec_list[2],'cooccurence': M_vec_list[3], 'coexpression': M_vec_list[4], 'database': M_vec_list[5]}
         
-        mat_name = 'Org' + org + 'BraneMF_w' + str(w) + '_' + dat + '.mat'
+        mat_name = os.path.join("PPMI_Matrices",'Org' + org + 'BraneMF_w' + str(w) + '_' + dat + '.mat')
         
         savemat(mat_name, net_type_dic)
             
