@@ -28,6 +28,15 @@ pip install -r requirements.txt
 ```
 Google drive: https://drive.google.com/drive/folders/1X5Gj5udIPKiLEvzeKWuUucnWw5AZOsnY?usp=sharing 
 ```
+To compute PPMI matrices from String networks, run the following command by providing taxanomy ID of the organism (e.g 4932: yeast, 9606: human)
+other organisms: https://stringdb-static.org/download/species.v11.5.txt 
+
+```
+ python BraneMF_buildPPMI.py --O 4932
+
+```
+
+
 **5.** Computation of embeddings
 
 ```
